@@ -1,4 +1,4 @@
-package com.example.pandu.calisthenics.menu
+package com.example.pandu.calisthenics.menu.task
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.pandu.calisthenics.R
 
-class AcivitiesFragment: Fragment() {
+class TaskFragment: Fragment() {
     var rootView : View? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 

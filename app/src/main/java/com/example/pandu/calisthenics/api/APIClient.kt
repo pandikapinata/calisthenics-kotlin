@@ -1,6 +1,7 @@
 package com.example.pandu.calisthenics.api
 
 import android.content.Context
+import android.util.Log
 import com.example.pandu.calisthenics.menu.profile.ProfileFragment
 import com.example.pandu.calisthenics.utils.PreferenceHelper
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,25 +14,18 @@ class APIClient {
     companion object {
         fun getService(context: Context?): ApiInterface {
             val preferencesHelper = PreferenceHelper(context)
-            val baseUrl = "https://book-api-progmob.herokuapp.com/api/"
+            val baseUrl = "http://192.168.43.74:8000/api/"
             val apiToken = preferencesHelper.deviceToken
+            //check apiToken already in there
+            Log.i("apiToken", "$apiToken")
             val client = OkHttpClient.Builder()
                 .addInterceptor { chain ->
-                    val request: Request
-                    if (preferencesHelper.getLogin()) {
-                        request = chain
-                            .request()
-                            .newBuilder()
-                            .addHeader("Content-Type", "application/json")
-                            .addHeader("Authorization", "Bearer $apiToken")
-                            .build()
-                    } else {
-                        request = chain
-                            .request()
-                            .newBuilder()
-                            .addHeader("Content-Type", "application/json")
-                            .build()
-                    }
+                    val request: Request = chain
+                        .request()
+                        .newBuilder()
+                        .addHeader("Content-Type", "application/json")
+                        .addHeader("Authorization", "Bearer $apiToken")
+                        .build()
                     chain.proceed(request)
                 }.build()
 

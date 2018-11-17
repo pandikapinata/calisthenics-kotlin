@@ -27,17 +27,27 @@ class LoginActivity : AppCompatActivity(), AuthView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        preferencesHelper = PreferenceHelper(this)
+        val token = preferencesHelper?.deviceToken
 
-        email_edit_text.addTextChangedListener(MyTextWatcher(email_edit_text))
-        password_edit_text.addTextChangedListener(MyTextWatcher(password_edit_text))
+        if(token != ""){
+            startActivity<MainActivity>()
 
-        tv_sign_up?.setOnClickListener {
-            startActivity<RegisterActivity>()
+        }else{
+            email_edit_text.addTextChangedListener(MyTextWatcher(email_edit_text))
+            password_edit_text.addTextChangedListener(MyTextWatcher(password_edit_text))
+
+            tv_sign_up?.setOnClickListener {
+                startActivity<RegisterActivity>()
+            }
+
+            btn_login.setOnClickListener {
+                submitForm()
+            }
         }
 
-        btn_login.setOnClickListener {
-            submitForm()
-        }
+
+
     }
 
 
@@ -54,7 +64,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
                 password_edit_text.text.toString())
         presenter = AuthPresenter(this, APIClient.getService(this))
 
-        preferencesHelper = PreferenceHelper(this)
+
 
     }
 

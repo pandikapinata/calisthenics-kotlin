@@ -10,20 +10,20 @@ class ProfilePresenter(private val view: ProfileView, private val service: ApiIn
     fun showProfile() {
         view.showLoading()
         service.userProfile()
-                .enqueue(object : Callback<User> {
-                    override fun onResponse(call: retrofit2.Call<User>, response: Response<User>) {
-                        if (response.isSuccessful) {
-                            view.getProfileUser(response.body()!!)
-                        } else {
-                            view.onError()
-                        }
-                        view.hideLoading()
+            .enqueue(object : Callback<User> {
+                override fun onResponse(call: retrofit2.Call<User>, response: Response<User>) {
+                    if (response.isSuccessful) {
+                        view.getProfileUser(response.body()!!)
+                    } else {
+                        view.onError()
                     }
+                    view.hideLoading()
+                }
 
-                    override fun onFailure(call: retrofit2.Call<User>, t: Throwable) {
-                        view.onFailure(t)
-                        view.hideLoading()
-                    }
-                })
+                override fun onFailure(call: retrofit2.Call<User>, t: Throwable) {
+                    view.onFailure(t)
+                    view.hideLoading()
+                }
+            })
     }
 }
