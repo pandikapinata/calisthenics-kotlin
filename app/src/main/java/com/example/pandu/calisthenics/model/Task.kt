@@ -6,20 +6,24 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Task(
-    @SerializedName("activity")
-    val activity: Int? = 0,
+    @SerializedName("taskDate")
+    val taskDate: String? = null,
     @SerializedName("id")
-    val id: Int? = 0,
+    val id: String? = null,
     @SerializedName("taskName")
     val taskName: String? = "",
     @SerializedName("taskNote")
     val taskNote: String? = "",
     @SerializedName("taskReps")
-    val taskReps: Int? = 0,
+    val taskReps: String? = null,
     @SerializedName("taskSets")
-    val taskSets: Int? = 0,
+    val taskSets: String? = null,
     @SerializedName("taskVolume")
-    val taskVolume: Int? = 0,
+    val taskVolume: String? = null,
     @SerializedName("user")
-    val user: Int? = 0
+    val user: String? = null,
+    @SerializedName("activityId")
+    val activityId: String? = null,
+    @SerializedName("taskIcon")
+    val taskIcon: String? = null
 ):Parcelable

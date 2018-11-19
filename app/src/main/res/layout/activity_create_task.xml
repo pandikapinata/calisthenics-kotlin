@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/whiteColor"
+
+    tools:context=".menu.task.CreateTaskActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Light">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll"
+            app:title="Add activity"
+            app:theme="@style/ToolbarTheme">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:theme="@style/ToolbarTheme"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+    
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Spinner
+                android:id="@+id/spinner_create"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_margin="15dp">
+            </Spinner>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/ti_date_picker"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_date_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:hint="Date"
+                    android:clickable="true"
+                    android:focusable="false"
+                    android:inputType="textEmailAddress" />
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/ti_notes"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="15dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_notes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:hint="Note"
+                    android:maxLines="5"
+                    android:inputType="textMultiLine" />
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/ti_sets"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="15dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/et_sets"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Sets"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/ti_reps"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="15dp">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/et_reps"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:hint="Reps"
+                        android:inputType="number" />
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <!--<android.support.design.button.MaterialButton-->
+            <!--android:id="@+id/btn_register"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_margin="15dp"-->
+            <!--android:textColor="@color/colorAccent"-->
+            <!--android:backgroundTint="@color/colorPrimaryDark"-->
+            <!--android:fontFamily="@font/poppins_semibold"-->
+            <!--android:text="SAVE" />-->
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

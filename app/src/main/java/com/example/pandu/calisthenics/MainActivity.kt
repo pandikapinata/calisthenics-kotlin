@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
         bottom_navigation.selectedItemId = navigation_activities
+
     }
 
     private fun loadProfileFragment(savedInstanceState: Bundle?) {

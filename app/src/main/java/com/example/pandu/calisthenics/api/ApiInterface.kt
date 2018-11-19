@@ -1,12 +1,12 @@
 package com.example.pandu.calisthenics.api
 
+import com.example.pandu.calisthenics.model.ActivityResponse
 import com.example.pandu.calisthenics.model.AuthResponse
+import com.example.pandu.calisthenics.model.TaskResponse
 import com.example.pandu.calisthenics.model.User
+import io.reactivex.Flowable
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface ApiInterface {
     @FormUrlEncoded
@@ -25,4 +25,23 @@ interface ApiInterface {
     @GET("auth/user")
     fun userProfile()
             : Call<User>
+
+    @GET("auth/tasks")
+    fun getTaskUser() : Flowable<TaskResponse>
+
+    @GET("auth/activities")
+    fun getActivities() : Flowable<ActivityResponse>
+
+    @GET("auth/activity/{id}")
+    fun getActivity(@Path("id") id: String) : Flowable<ActivityResponse>
+
+    @FormUrlEncoded
+    @POST("auth/task")
+    fun storeTask(
+        @Field("activity_id") activityId:String,
+        @Field("note") note:String,
+        @Field("sets") sets:String,
+        @Field("reps") reps:String,
+        @Field("date_task") dateTask:String)
+            : Flowable<TaskResponse>
 }

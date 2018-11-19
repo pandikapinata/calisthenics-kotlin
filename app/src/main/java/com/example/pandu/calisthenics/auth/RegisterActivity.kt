@@ -10,17 +10,13 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.example.pandu.calisthenics.R
 import com.example.pandu.calisthenics.api.APIClient
-import com.example.pandu.calisthenics.api.ApiInterface
 import com.example.pandu.calisthenics.model.AuthResponse
 import com.example.pandu.calisthenics.utils.PreferenceHelper
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.startActivity
 
 class RegisterActivity : AppCompatActivity(), AuthView{
 
-
-    private lateinit var mService: ApiInterface
     private var preferencesHelper: PreferenceHelper? = null
     private var presenter: AuthPresenter? = null
 
@@ -57,10 +53,9 @@ class RegisterActivity : AppCompatActivity(), AuthView{
         presenter?.register(
             name_edit_text_regis.text.toString(),
             email_edit_text_regis.text.toString(),
-            password_edit_text.text.toString())
+            password_edit_text_regis.text.toString())
         presenter = AuthPresenter(this, APIClient.getService(this))
 
-        preferencesHelper = PreferenceHelper(this)
     }
 
 
@@ -137,6 +132,8 @@ class RegisterActivity : AppCompatActivity(), AuthView{
 
     override fun onSuccess(userAuth: AuthResponse) {
         Toast.makeText(this, "Register Success", Toast.LENGTH_SHORT).show()
+        startActivity<LoginActivity>()
+        finish()
     }
 
     override fun onError() {

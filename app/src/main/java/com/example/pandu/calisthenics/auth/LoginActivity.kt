@@ -16,10 +16,6 @@ import com.example.pandu.calisthenics.model.AuthResponse
 import com.example.pandu.calisthenics.utils.PreferenceHelper
 import org.jetbrains.anko.startActivity
 
-
-
-
-
 class LoginActivity : AppCompatActivity(), AuthView {
 
     private var preferencesHelper: PreferenceHelper? = null
@@ -32,7 +28,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
 
         if(token != ""){
             startActivity<MainActivity>()
-
+            finish()
         }else{
             email_edit_text.addTextChangedListener(MyTextWatcher(email_edit_text))
             password_edit_text.addTextChangedListener(MyTextWatcher(password_edit_text))
@@ -45,8 +41,6 @@ class LoginActivity : AppCompatActivity(), AuthView {
                 submitForm()
             }
         }
-
-
 
     }
 
@@ -63,8 +57,6 @@ class LoginActivity : AppCompatActivity(), AuthView {
                 email_edit_text.text.toString(),
                 password_edit_text.text.toString())
         presenter = AuthPresenter(this, APIClient.getService(this))
-
-
 
     }
 
@@ -131,6 +123,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
 
         Toast.makeText(this, userAuth.access_token, Toast.LENGTH_SHORT).show()
         startActivity<MainActivity>()
+        finish()
     }
 
     override fun onError() {
