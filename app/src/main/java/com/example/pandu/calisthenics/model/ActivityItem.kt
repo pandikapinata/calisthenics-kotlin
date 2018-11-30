@@ -3,8 +3,16 @@ package com.example.pandu.calisthenics.model
 import com.google.gson.annotations.SerializedName
 
 data class ActivityItem(
-    @SerializedName("activityName")
+    val id: Long?,
+    val activityId: String? = "",
     val activityName: String? = "",
-    @SerializedName("id")
-    val id: Int? = 0
-)
+    val activityIcon: String? = ""
+){
+    companion object {
+        const val TABLE_ACTIVITY : String = "TABLE_ACTIVITY"
+        const val ID : String = "ID_"
+        const val ACTIVITY_ID : String = "ACTIVITY_ID"
+        const val ACTIVITY_NAME : String = "ACTIVITY_NAME"
+        const val ACTIVITY_ICON : String = "ACTIVITY_ICON"
+    }
+}

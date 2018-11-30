@@ -8,15 +8,18 @@ import com.example.pandu.calisthenics.model.AuthResponse
 
 class PreferenceHelper (context: Context?){
 
-    private val PREFERENCES_NAME = "shared_preferences"
     private val TOKEN = "token"
-    private val NAME = "name"
     private val LOGIN = "login"
-    private val MODE = Context.MODE_PRIVATE
+
+    private val NAME = "name"
+    private val EMAIL = "email"
+    private val FCM_TOKEN = "fcm_token"
+    private val WEIGHT = "weight"
+    private val HEIGHT = "height"
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
 //    save device token
-internal var deviceToken : String? = preferences.getString(TOKEN, "")
+    internal var deviceToken : String? = preferences.getString(TOKEN, "")
     set(token) =  preferences.edit().putString(TOKEN, token).apply()
 
 
@@ -24,17 +27,33 @@ internal var deviceToken : String? = preferences.getString(TOKEN, "")
         preferences.edit().putBoolean(LOGIN, login).apply()
     }
 
-    fun getLogin(): Boolean {
-        return preferences.getBoolean(LOGIN, false)
-    }
-
     fun setName(name: String?) {
         preferences.edit().putString(NAME, name).apply()
     }
 
-    fun getName(): String? {
-        return preferences.getString(NAME, "")
+    fun setEmail(email: String?) {
+        preferences.edit().putString(EMAIL, email).apply()
     }
+
+
+    fun setFCM(fcm: String?) {
+        preferences.edit().putString(FCM_TOKEN, fcm).apply()
+    }
+
+    fun setWeight(weight: String?) {
+        preferences.edit().putString(WEIGHT, weight).apply()
+    }
+
+    fun setHeight(height: String?) {
+        preferences.edit().putString(HEIGHT, height).apply()
+    }
+
+    internal var getName : String? = preferences.getString(NAME, "")
+    internal var getEmail : String? = preferences.getString(EMAIL, "")
+    internal var getFCM : String? = preferences.getString(FCM_TOKEN, "")
+    internal var getWeight : String? = preferences.getString(WEIGHT, "")
+    internal var getHeight : String? = preferences.getString(HEIGHT, "")
+
 
     fun setUserLogin(user: AuthResponse){
         setLogin(true)

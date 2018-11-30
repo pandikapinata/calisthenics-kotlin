@@ -14,14 +14,25 @@ import com.example.pandu.calisthenics.R
 import com.example.pandu.calisthenics.api.APIClient
 import com.example.pandu.calisthenics.model.AuthResponse
 import com.example.pandu.calisthenics.utils.PreferenceHelper
+import com.example.pandu.calisthenics.utils.after
+import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.startActivity
+import android.app.Activity
+import android.util.Log
+import okhttp3.RequestBody
+import retrofit2.Callback
+import retrofit2.Response
 
+
+@Suppress("DEPRECATION")
 class LoginActivity : AppCompatActivity(), AuthView {
 
     private var preferencesHelper: PreferenceHelper? = null
     private var presenter: AuthPresenter? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_login)
         preferencesHelper = PreferenceHelper(this)
         val token = preferencesHelper?.deviceToken
@@ -53,10 +64,14 @@ class LoginActivity : AppCompatActivity(), AuthView {
         if (!validatePassword()) {
             return
         }
+        showLoading()
+        presenter = AuthPresenter(this, APIClient.getService(this))
+
         presenter?.login(
                 email_edit_text.text.toString(),
                 password_edit_text.text.toString())
-        presenter = AuthPresenter(this, APIClient.getService(this))
+
+
 
     }
 
@@ -111,19 +126,23 @@ class LoginActivity : AppCompatActivity(), AuthView {
     }
 
     override fun showLoading() {
-        Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show()
+        indeterminateProgressDialog("Please wait a bit…").show()
     }
 
     override fun hideLoading() {
-        Toast.makeText(this, "Loaded", Toast.LENGTH_SHORT).show()
+        indeterminateProgressDialog("Please wait a bit…").dismiss()
+
     }
 
     override fun onSuccess(userAuth: AuthResponse) {
         preferencesHelper?.setUserLogin(userAuth)
 
-        Toast.makeText(this, userAuth.access_token, Toast.LENGTH_SHORT).show()
-        startActivity<MainActivity>()
-        finish()
+        pushFCMToken()
+        after(2000){
+            startActivity<MainActivity>()
+            finish()
+        }
+        hideLoading()
     }
 
     override fun onError() {
@@ -132,6 +151,31 @@ class LoginActivity : AppCompatActivity(), AuthView {
 
     override fun onFailure(t: Throwable) {
         Toast.makeText(this, "Failed : $t", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun pushFCMToken(){
+        val pref = PreferenceHelper(this)
+        val apiToken = pref.deviceToken
+        //check apiToken already in there
+        Log.i("TOKEN_AUTH", "$apiToken")
+        val fcmUSER = pref.getFCM
+        Log.i("FCM_TOKEN", fcmUSER)
+        val fcmToken = RequestBody.create(okhttp3.MultipartBody.FORM, fcmUSER)
+        APIClient.getService(this)
+            .pushToken(fcmToken)
+            .enqueue(object : Callback<AuthResponse> {
+                override fun onResponse(call: retrofit2.Call<AuthResponse>, response: Response<AuthResponse>) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@LoginActivity, "Push FCM Token", Toast.LENGTH_LONG).show()
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Failed", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: retrofit2.Call<AuthResponse>, t: Throwable) {
+                    Toast.makeText(this@LoginActivity, "Error: $t", Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
 }

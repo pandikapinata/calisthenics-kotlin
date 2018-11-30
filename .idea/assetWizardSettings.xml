@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_plus" />
-                            <entry key="sourceFile" value="C:\Users\Pandu\Downloads\plus.svg" />
+                            <entry key="outputName" value="ic_clock" />
+                            <entry key="sourceFile" value="C:\Users\Pandu\Downloads\clock.svg" />
                           </map>
                         </option>
                       </PersistentState>

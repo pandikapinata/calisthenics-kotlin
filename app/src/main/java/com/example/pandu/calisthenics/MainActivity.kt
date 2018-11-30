@@ -6,7 +6,7 @@ import com.example.pandu.calisthenics.R.id.navigation_home
 import com.example.pandu.calisthenics.R.id.navigation_profile
 import com.example.pandu.calisthenics.R.id.navigation_activities
 import com.example.pandu.calisthenics.menu.task.TaskFragment
-import com.example.pandu.calisthenics.menu.DashboradFragment
+import com.example.pandu.calisthenics.menu.dashboard.DashboradFragment
 import com.example.pandu.calisthenics.menu.profile.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -58,7 +58,8 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.main_container, DashboradFragment(), DashboradFragment::class.java.simpleName)
+                    .replace(R.id.main_container,
+                        DashboradFragment(), DashboradFragment::class.java.simpleName)
                     .commit()
         }
     }

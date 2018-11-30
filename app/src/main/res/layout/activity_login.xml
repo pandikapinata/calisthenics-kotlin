@@ -56,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_margin="15dp"
+            android:focusable="false"
             android:backgroundTint="@color/colorPrimaryDark"
             android:fontFamily="@font/poppins_semibold"
             android:text="Login" />

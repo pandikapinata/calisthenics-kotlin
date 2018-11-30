@@ -3,6 +3,8 @@ package com.example.pandu.calisthenics.menu.profile
 import com.example.pandu.calisthenics.api.ApiInterface
 import com.example.pandu.calisthenics.model.AuthResponse
 import com.example.pandu.calisthenics.model.User
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Callback
 import retrofit2.Response
 
@@ -15,15 +17,18 @@ class ProfilePresenter(private val view: ProfileView, private val service: ApiIn
                     if (response.isSuccessful) {
                         view.getProfileUser(response.body()!!)
                     } else {
+                        view.getLocalData()
                         view.onError()
                     }
                     view.hideLoading()
                 }
 
                 override fun onFailure(call: retrofit2.Call<User>, t: Throwable) {
+                    view.getLocalData()
                     view.onFailure(t)
                     view.hideLoading()
                 }
             })
     }
+
 }

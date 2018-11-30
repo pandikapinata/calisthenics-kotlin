@@ -7,7 +7,7 @@ import android.view.MenuItem
 import com.bumptech.glide.Glide
 import com.example.pandu.calisthenics.R
 import com.example.pandu.calisthenics.model.Task
-import com.example.pandu.calisthenics.toDatetoString
+import com.example.pandu.calisthenics.utils.toDatetoString
 import kotlinx.android.synthetic.main.activity_detail_task.*
 import org.jetbrains.anko.ctx
 

@@ -7,6 +7,7 @@ interface ProfileView {
     fun showLoading()
     fun hideLoading()
     fun getProfileUser(user: User)
+    fun getLocalData()
     fun onError()
     fun onFailure(t: Throwable)
 }

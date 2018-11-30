@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "364054442789",
+    "firebase_url": "https://notification-1fb81.firebaseio.com",
+    "project_id": "notification-1fb81",
+    "storage_bucket": "notification-1fb81.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364054442789:android:3e5ddeeb81e6fb7b",
+        "android_client_info": {
+          "package_name": "com.example.pandu.calisthenics"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364054442789-il3o29mh0sk5bplev5fg4qa6os9khdi4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE8fBZG0qOZovOR4hgxZs-mdeoRdqjZKY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

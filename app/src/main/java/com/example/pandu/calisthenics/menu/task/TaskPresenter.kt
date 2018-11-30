@@ -28,17 +28,19 @@ class TaskPresenter(private val view: TaskView, private val service: ApiInterfac
                 override fun onNext(t: TaskResponse?) {
                     t?.tasks?.let { view.showTaskList(it) }
                     view.hideLoading()
-
                 }
 
                 override fun onError(t: Throwable?) {
                     Log.d(ContentValues.TAG, "ERROR GET TASKS$t")
+                    view.getLocalData()
                     view.hideLoading()
                 }
 
             })
         compositeDisposable.addAll(disposable)
     }
+
+
 
     fun getActivities() {
         view.showLoading()
@@ -58,6 +60,7 @@ class TaskPresenter(private val view: TaskView, private val service: ApiInterfac
 
                 override fun onError(t: Throwable?) {
                     Log.d(ContentValues.TAG, "ERROR GET ACTIVITY$t")
+                    view.getLocalData()
                     view.hideLoading()
                 }
 
@@ -65,10 +68,10 @@ class TaskPresenter(private val view: TaskView, private val service: ApiInterfac
         compositeDisposable.addAll(disposable)
     }
 
-    fun storeTask(activityId: String, note: String, sets: String, reps: String, dateTask: String) {
+    fun storeTask(activityId: String, note: String, sets: String, reps: String, volume:String, dateTask: String) {
         view.showLoading()
         val disposable : Disposable
-        disposable = service.storeTask(activityId, note, sets, reps, dateTask)
+        disposable = service.storeTask(activityId, note, sets, reps, volume, dateTask)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribeWith(object : ResourceSubscriber<TaskResponse>(){

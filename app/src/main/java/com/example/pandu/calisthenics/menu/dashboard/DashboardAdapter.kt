@@ -1,49 +1,49 @@
-package com.example.pandu.calisthenics.menu.task
+package com.example.pandu.calisthenics.menu.dashboard
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
-import com.example.pandu.calisthenics.*
-import com.example.pandu.calisthenics.model.Task
+import com.example.pandu.calisthenics.R
+import com.example.pandu.calisthenics.model.TaskDay
 import com.example.pandu.calisthenics.utils.getDateSplit
 import com.example.pandu.calisthenics.utils.gone
 import com.example.pandu.calisthenics.utils.toDatetoString
 import kotlinx.android.synthetic.main.task_list.view.*
 
-class TaskAdapter(private val context: Context?, private val tasks : List<Task>, private val listener : (Task) -> Unit) : RecyclerView.Adapter<TaskViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        return TaskViewHolder(LayoutInflater.from(context).inflate(R.layout.task_list, parent, false))
+class DashboardAdapter(private val context: Context?, private val tasks : List<TaskDay>, private val listener : (TaskDay) -> Unit) : RecyclerView.Adapter<TaskViewHolder>() {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): TaskViewHolder {
+        return TaskViewHolder(LayoutInflater.from(context).inflate(R.layout.task_list, p0, false))
     }
 
     override fun getItemCount(): Int {
         return tasks.size
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+    override fun onBindViewHolder(p0: TaskViewHolder, p1: Int) {
 
-        val curDate = getDateSplit(tasks[position].taskDate.toString())
+        val curDate = getDateSplit(tasks[p1].taskDate.toString())
 //        val type: String = tasks[position].activityId.toString()
 //        Log.i("ACTIVITY_ID", type)
 //        Log.i("CURRENT_DATE", curDate)
         var prevDate = ""
-        if (position > 0){
-            prevDate = getDateSplit(tasks[position-1].taskDate.toString())
+        if (p1 > 0){
+            prevDate = getDateSplit(tasks[p1-1].taskDate.toString())
         }
         if (curDate == prevDate) {
-            holder.itemView.tv_date_task.gone()
-            holder.itemView.divider.gone()
+            p0.itemView.tv_date_task.gone()
+            p0.itemView.divider.gone()
         }
 
-        holder.bindItem(tasks[position],listener)
+        p0.bindItem(tasks[p1],listener)
     }
 }
 
+
 class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view){
-    fun bindItem(taskItem : Task,  listener : (Task) -> Unit){
+    fun bindItem(taskItem : TaskDay,  listener : (TaskDay) -> Unit){
 
         itemView.tv_sets_task.text = taskItem.taskSets
         itemView.tv_reps_task.text = taskItem.taskReps
