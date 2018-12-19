@@ -55,6 +55,7 @@
             android:layout_height="50dp"
             android:layout_margin="15dp"
             android:focusable="false"
+            android:fontFamily="@font/neo_medium"
             android:backgroundTint="@color/colorPrimaryDark"
             android:text="Login" />
 
@@ -69,6 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="end"
+                android:fontFamily="@font/neo"
                 android:text="Dont have an account?" />
 
             <TextView
@@ -77,6 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_weight="1.5"
+                android:fontFamily="@font/neo_medium"
                 android:gravity="start"
                 android:text="Sign Up" />
 

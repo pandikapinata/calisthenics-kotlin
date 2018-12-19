@@ -50,12 +50,12 @@ class RegisterActivity : AppCompatActivity(), AuthView{
         if (!validatePassword()) {
             return
         }
-
+        presenter = AuthPresenter(this, APIClient.getService(this))
         presenter?.register(
             name_edit_text_regis.text.toString(),
             email_edit_text_regis.text.toString(),
             password_edit_text_regis.text.toString())
-        presenter = AuthPresenter(this, APIClient.getService(this))
+
 
     }
 

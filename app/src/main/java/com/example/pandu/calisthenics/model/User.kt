@@ -22,4 +22,6 @@ data class User(
         const val HEIGHT_USER : String = "HEIGHT_USER"
         const val PHOTO_PROFILE : String = "PHOTO_PROFILE"
     }
+
+
 }

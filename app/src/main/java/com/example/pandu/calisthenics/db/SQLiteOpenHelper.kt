@@ -36,19 +36,6 @@ class SQLiteOpenHelper(ctx:Context): ManagedSQLiteOpenHelper(ctx, "TaskScheduler
             Task.STATUS_DELETE to TEXT
         )
 
-//        db?.createTable(
-//            TaskSync.TABLE_TASK_TEMPORARY, true,
-//            TaskSync.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-//            TaskSync.ID_ACTIVITY to TEXT,
-//            TaskSync.TASK_NAME to TEXT,
-//            TaskSync.TASK_NOTE to TEXT,
-//            TaskSync.TASK_SETS to TEXT,
-//            TaskSync.TASK_REPS to TEXT,
-//            TaskSync.TASK_VOLUME to TEXT,
-//            TaskSync.TASK_DATE to TEXT,
-//            TaskSync.TASK_ICON to TEXT
-//        )
-
         db?.createTable(
             TaskDay.TABLE_TASKDAY, true,
             TaskDay.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
@@ -77,6 +64,13 @@ class SQLiteOpenHelper(ctx:Context): ManagedSQLiteOpenHelper(ctx, "TaskScheduler
         )
 
         db?.createTable(
+            StatsResponse.TABLE_STATS, true,
+            StatsResponse.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+            StatsResponse.STAT_SETS to TEXT + UNIQUE,
+            StatsResponse.STAT_VOLUME to TEXT
+        )
+
+        db?.createTable(
             ActivityItem.TABLE_ACTIVITY, true,
             ActivityItem.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
             ActivityItem.ACTIVITY_ID to TEXT + UNIQUE,
@@ -87,8 +81,9 @@ class SQLiteOpenHelper(ctx:Context): ManagedSQLiteOpenHelper(ctx, "TaskScheduler
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.dropTable(Task.TABLE_TASK, true)
-        db?.dropTable(User.TABLE_USER, true)
         db?.dropTable(TaskDay.TABLE_TASKDAY, true)
+        db?.dropTable(User.TABLE_USER, true)
+        db?.dropTable(StatsResponse.TABLE_STATS, true)
         db?.dropTable(ActivityItem.TABLE_ACTIVITY, true)
     }
 

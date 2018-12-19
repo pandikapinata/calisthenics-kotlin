@@ -28,13 +28,13 @@ import org.jetbrains.anko.db.select
 import org.jetbrains.anko.design.snackbar
 
 
-class ProfileFragment:Fragment(), ProfileView {
+class ProfileFragment : Fragment(), ProfileView {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var swipeRefresh: SwipeRefreshLayout
     private var preferencesHelper: PreferenceHelper? = null
     private var presenter: ProfilePresenter? = null
-    var rootView : View? = null
+    var rootView: View? = null
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -52,13 +52,13 @@ class ProfileFragment:Fragment(), ProfileView {
         presenter = ProfilePresenter(this, APIClient.getService(context))
 
 
-        if(isNetworkAvailable(context)){
+        if (isNetworkAvailable(context)) {
             presenter?.showProfile()
             sr_profile.setOnRefreshListener {
                 sr_profile.isRefreshing = false
                 presenter?.showProfile()
             }
-        }else{
+        } else {
             getLocalData()
             sr_profile.setOnRefreshListener {
                 sr_profile.isRefreshing = false
@@ -66,7 +66,6 @@ class ProfileFragment:Fragment(), ProfileView {
             }
             hideLoading()
         }
-
 
 
     }
@@ -84,22 +83,22 @@ class ProfileFragment:Fragment(), ProfileView {
         context?.database?.use {
             delete(User.TABLE_USER)
         }
-
         //insert to sqlite
-        try{
-            context?.database?.use{
-                    insert(User.TABLE_USER,
+        try {
+            context?.database?.use {
+                insert(
+                    User.TABLE_USER,
                     User.USER_ID to user.idUser,
-                            User.NAME_USER to user.name,
-                            User.EMAIL_USER to user.email,
-                            User.FCM_TOKEN_USER to user.fcm_token,
-                            User.WEIGHT_USER to user.weight,
-                            User.HEIGHT_USER to user.height,
-                            User.PHOTO_PROFILE to user.photo_profile
-                    )
+                    User.NAME_USER to user.name,
+                    User.EMAIL_USER to user.email,
+                    User.FCM_TOKEN_USER to user.fcm_token,
+                    User.WEIGHT_USER to user.weight,
+                    User.HEIGHT_USER to user.height,
+                    User.PHOTO_PROFILE to user.photo_profile
+                )
             }
 
-        } catch (e: SQLiteConstraintException){
+        } catch (e: SQLiteConstraintException) {
             Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
         }
         getLocalData()
@@ -147,24 +146,42 @@ class ProfileFragment:Fragment(), ProfileView {
 
         context?.database?.use {
             val result = select(User.TABLE_USER)
-            val taskSQLite = result.parseSingle(classParser<User>())
+            Log.e("USER", result.toString())
+            val taskSQLite = result.parseOpt(classParser<User>())
 
-            tv_name_user.text = taskSQLite.name
-            tv_email_user.text = taskSQLite.email
-            et_weight.setText(taskSQLite.weight)
-            et_height.setText(taskSQLite.height)
+            tv_name_user.text = taskSQLite?.name
+            tv_email_user.text = taskSQLite?.email
+            et_weight.setText(taskSQLite?.weight)
+            et_height.setText(taskSQLite?.height)
             Glide.with(this@ProfileFragment)
-                .load(taskSQLite.photo_profile)
+                .load(taskSQLite?.photo_profile)
                 .into(profile_image)
 
-//            GlideApp.get(context!!).clearDiskCache()
-//            GlideApp.with(this@ProfileFragment)
-//                .load(taskSQLite.photo_profile)
-//                .into(profile_image)
-
-
+            val bmiScore = ("%.2f".format(bmiScore(taskSQLite?.weight.toString(), taskSQLite?.height.toString())))
+            et_bmi_score.setText(bmiScore)
+            val bmiStatus = bmiScore.toDouble()
+            et_bmi_status.setText(bmiStatus(bmiStatus))
         }
 
+    }
+
+    private fun bmiScore(weight: String, height: String): Double {
+        val weightInt = weight.toInt()
+        val heightInt:Double = height.toInt()/100.toDouble()
+        Log.e("HEIGHT", heightInt.toString())
+        val bmi = weightInt/(heightInt*heightInt)
+        return bmi
+    }
+
+    private fun bmiStatus(bmi: Double): String {
+        return if (bmi <17.0 || bmi<18.4)
+            "Kurus"
+        else if (bmi > 18.5 || bmi<25)
+            "Normal"
+        else if (bmi > 25.1)
+            "Gemuk"
+        else
+            " "
     }
 
     override fun onResume() {

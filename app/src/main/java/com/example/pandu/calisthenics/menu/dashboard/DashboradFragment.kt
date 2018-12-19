@@ -45,6 +45,7 @@ class DashboradFragment: Fragment(), DashboardView {
             presenter.getStatsperDay()
         }else{
             getLocalData()
+            loadFromLocal()
             hideLoading()
         }
     }
@@ -108,7 +109,34 @@ class DashboradFragment: Fragment(), DashboardView {
     }
 
     override fun getStatsData(stats: StatsResponse) {
-        tv_total_sets.text = stats.sets
-        tv_total_volume.text = stats.volume
+        context?.database?.use {
+            delete(StatsResponse.TABLE_STATS)
+        }
+        //insert to sqlite
+        try{
+            context?.database?.use{
+                insert(StatsResponse.TABLE_STATS,
+                    StatsResponse.STAT_SETS to stats.sets,
+                    StatsResponse.STAT_VOLUME to stats.volume
+                )
+            }
+
+        } catch (e: SQLiteConstraintException){
+            Toast.makeText(context, e.localizedMessage, Toast.LENGTH_SHORT).show()
+        }
+
+        loadFromLocal()
+
+    }
+
+    private fun loadFromLocal() {
+        context?.database?.use {
+            val result = select(StatsResponse.TABLE_STATS)
+            val stats = result.parseOpt(classParser<StatsResponse>())
+
+            tv_total_sets.text = stats?.sets
+            tv_total_volume.text = stats?.volume
+
+        }
     }
 }
