@@ -18,10 +18,21 @@ import com.example.pandu.calisthenics.utils.after
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.startActivity
 import android.app.Activity
+import android.content.ContentValues
+import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
+import com.example.pandu.calisthenics.db.database
+import com.example.pandu.calisthenics.model.Task
+import com.example.pandu.calisthenics.model.TaskResponse
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subscribers.ResourceSubscriber
 import okhttp3.RequestBody
 import retrofit2.Callback
 import retrofit2.Response
+import org.jetbrains.anko.db.*
 
 
 @Suppress("DEPRECATION")
@@ -55,6 +66,31 @@ class LoginActivity : AppCompatActivity(), AuthView {
 
     }
 
+    override fun getTaskList(task: List<Task>) {
+//    insert to sqlite
+        try{
+            database.use{
+                for(value in task){
+                    insert(Task.TABLE_TASK,
+                        Task.TASK_ID to value.taskId,
+                        Task.ID_ACTIVITY to value.activityId,
+                        Task.TASK_NAME to value.taskName,
+                        Task.TASK_NOTE to value.taskNote,
+                        Task.TASK_SETS to value.taskSets,
+                        Task.TASK_REPS to value.taskReps,
+                        Task.TASK_VOLUME to value.taskVolume,
+                        Task.TASK_DATE to value.taskDate,
+                        Task.TASK_ICON to value.taskIcon,
+                        Task.STATUS_PUSH to "1",
+                        Task.STATUS_DELETE to "1"
+                    )
+                }
+            }
+
+        } catch (e: SQLiteConstraintException){
+            Toast.makeText(this@LoginActivity, e.localizedMessage, Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun submitForm() {
         if (!validateEmail()) {
@@ -70,8 +106,6 @@ class LoginActivity : AppCompatActivity(), AuthView {
         presenter?.login(
                 email_edit_text.text.toString(),
                 password_edit_text.text.toString())
-
-
 
     }
 
@@ -138,6 +172,7 @@ class LoginActivity : AppCompatActivity(), AuthView {
         preferencesHelper?.setUserLogin(userAuth)
 
         pushFCMToken()
+        loadDataServer()
         after(2000){
             startActivity<MainActivity>()
             finish()
@@ -176,6 +211,36 @@ class LoginActivity : AppCompatActivity(), AuthView {
                     Toast.makeText(this@LoginActivity, "Error: $t", Toast.LENGTH_SHORT).show()
                 }
             })
+    }
+
+    private fun loadDataServer(){
+        val compositeDisposable = CompositeDisposable()
+        val pref = PreferenceHelper(this)
+        val apiToken = pref.deviceToken
+        //check apiToken already in there
+        Log.i("TOKEN_AUTH", "$apiToken")
+
+        val service = APIClient.getService(this)
+            val disposable : Disposable
+            disposable = service.loadTasks()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(object : ResourceSubscriber<TaskResponse>(){
+                    override fun onComplete() {
+
+                    }
+
+                    override fun onNext(t: TaskResponse?) {
+                        t?.tasks?.let { getTaskList(it) }
+                        Toast.makeText(this@LoginActivity, "Load data from server success", Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onError(t: Throwable?) {
+                        Log.d(ContentValues.TAG, "ERROR LOAD TASKS$t")
+                    }
+
+                })
+            compositeDisposable.addAll(disposable)
     }
 
 }

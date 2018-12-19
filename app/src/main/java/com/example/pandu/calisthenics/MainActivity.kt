@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
                     .replace(R.id.main_container, ProfileFragment(), ProfileFragment::class.java.simpleName)
                     .commit()
         }
+
     }
 
     private fun loadActivitiesFragment(savedInstanceState: Bundle?) {

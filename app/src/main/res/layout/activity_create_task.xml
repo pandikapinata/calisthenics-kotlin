@@ -19,16 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="exitUntilCollapsed|scroll"
-            app:title="Add activity"
-            app:theme="@style/ToolbarTheme">
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                android:theme="@style/ToolbarTheme"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
@@ -62,7 +59,6 @@
                     android:id="@+id/et_date_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
                     android:hint="Date"
                     android:clickable="true"
                     android:focusable="false"/>
@@ -79,7 +75,6 @@
                     android:id="@+id/et_time_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
                     android:hint="Time"
                     android:clickable="true"
                     android:focusable="false"/>
@@ -97,7 +92,6 @@
                     android:id="@+id/et_notes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
                     android:hint="Note"
                     android:maxLines="5"
                     android:inputType="textMultiLine" />
@@ -120,7 +114,6 @@
                         android:id="@+id/et_sets"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
                         android:hint="Sets"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
@@ -137,7 +130,6 @@
                         android:id="@+id/et_reps"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/poppins"
                         android:hint="Reps"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>

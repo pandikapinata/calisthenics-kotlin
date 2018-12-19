@@ -27,9 +27,12 @@ import android.app.Activity
 import android.widget.Toast
 import com.example.pandu.calisthenics.api.APIClient
 import com.example.pandu.calisthenics.utils.after
+import com.example.pandu.calisthenics.utils.isNetworkAvailable
 import okhttp3.MediaType
 import org.jetbrains.anko.alert
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.indeterminateProgressDialog
+import org.jetbrains.anko.toast
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
@@ -210,12 +213,19 @@ class EditProfileActivity : AppCompatActivity(){
                 true
             }
             R.id.create_task -> {
-                upload()
-                indeterminateProgressDialog("Please wait a bit…").show()
-                after(2000) {
-                    indeterminateProgressDialog("Please wait a bit…").dismiss()
-                    finish()
+                if(isNetworkAvailable(this)){
+                    upload()
+                    indeterminateProgressDialog("Please wait a bit…").show()
+                    after(2000) {
+                        indeterminateProgressDialog("Please wait a bit…").dismiss()
+                        finish()
+                    }
+                }else{
+                    val sb = toolbarAct?.snackbar("Error, can't edit profile, No Internet Connection!")
+                    sb?.view?.setBackgroundColor(ContextCompat.getColor(this, R.color.redColor))
+                    sb?.show()
                 }
+
                 true
             }
 

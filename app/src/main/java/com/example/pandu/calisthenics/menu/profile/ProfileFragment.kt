@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
 import android.widget.ProgressBar
@@ -17,6 +18,8 @@ import org.jetbrains.anko.startActivity
 import android.view.MenuInflater
 import com.bumptech.glide.Glide
 import com.example.pandu.calisthenics.db.database
+import com.example.pandu.calisthenics.model.Task
+import com.example.pandu.calisthenics.model.TaskDay
 import com.example.pandu.calisthenics.utils.*
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.delete
@@ -42,10 +45,11 @@ class ProfileFragment:Fragment(), ProfileView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         setHasOptionsMenu(true)
+        (activity as AppCompatActivity).supportActionBar!!.title = "Profile"
         swipeRefresh = sr_profile
         progressBar = pb_profile
-        preferencesHelper = PreferenceHelper(activity)
-        presenter = ProfilePresenter(this, APIClient.getService(activity))
+        preferencesHelper = PreferenceHelper(context)
+        presenter = ProfilePresenter(this, APIClient.getService(context))
 
 
         if(isNetworkAvailable(context)){
@@ -103,11 +107,11 @@ class ProfileFragment:Fragment(), ProfileView {
     }
 
     override fun onError() {
-        Toast.makeText(activity, "Error", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
     }
 
     override fun onFailure(t: Throwable) {
-        Toast.makeText(activity, "Failed : $t", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Failed : $t", Toast.LENGTH_SHORT).show()
     }
 
 
@@ -121,6 +125,11 @@ class ProfileFragment:Fragment(), ProfileView {
         return when (item.itemId) {
             R.id.logout_profile -> {
                 preferencesHelper?.logout()
+                context?.database?.use {
+                    delete(User.TABLE_USER)
+                    delete(Task.TABLE_TASK)
+                    delete(TaskDay.TABLE_TASKDAY)
+                }
                 context?.startActivity<LoginActivity>()
                 true
 
@@ -160,9 +169,7 @@ class ProfileFragment:Fragment(), ProfileView {
 
     override fun onResume() {
         super.onResume()
-        showLoading()
         presenter?.showProfile()
-        hideLoading()
     }
 
 }

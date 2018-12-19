@@ -5,10 +5,10 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Task(
-    @SerializedName("taskId")
+data class Task (
     val id: Long?,
-//    val taskId: String? = null,
+    @SerializedName("taskId")
+    val taskId: String? = null,
 //    @SerializedName("user")
 //    val user: String? = null,
     @SerializedName("activityId")
@@ -27,13 +27,16 @@ data class Task(
     val taskDate: String? = null,
     @SerializedName("taskIcon")
     val taskIcon: String? = null,
-    val status: String? = null
+//    @SerializedName("idSQL")
+//    val idSQL: String? = null,
+    val statusPush: String? = null,
+    val statusDelete: String? = null
 ):Parcelable{
 
     companion object {
         const val TABLE_TASK : String = "TABLE_TASK"
         const val ID : String = "ID_"
-//        const val TASK_ID : String = "TASK_ID"
+        const val TASK_ID : String = "TASK_ID"
 //        const val USER_ID : String = "USER_ID"
         const val ID_ACTIVITY : String = "ID_ACTIVITY"
         const val TASK_NAME : String = "TASK_NAME"
@@ -43,6 +46,7 @@ data class Task(
         const val TASK_VOLUME : String = "TASK_VOLUME"
         const val TASK_DATE : String = "TASK_DATE"
         const val TASK_ICON : String = "TASK_ICON"
-        const val STATUS: String = "STATUS"
+        const val STATUS_PUSH: String = "STATUS_PUSH"
+        const val STATUS_DELETE: String = "STATUS_DELETE"
     }
 }

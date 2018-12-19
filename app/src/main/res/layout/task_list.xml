@@ -17,8 +17,9 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginBottom="5dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:fontFamily="@font/poppins_semibold"
                 android:gravity="start"
+                android:textSize="16sp"
+                android:fontFamily="@font/neo_medium"
                 android:text="Sun, Nov 15" />
 
         <View
@@ -48,7 +49,6 @@
 
                 <ImageView
                     android:layout_marginStart="15dp"
-                    android:layout_marginBottom="2dp"
                     android:layout_width="12dp"
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_clock"/>
@@ -57,9 +57,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/neo"
                     android:textColor="@color/colorPrimaryDark"
-                    android:fontFamily="@font/poppins"
                     android:gravity="start"
                     android:text="08:20" />
             </LinearLayout>
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:textColor="@color/colorPrimaryDark"
-                android:fontFamily="@font/poppins_semibold"
+                android:fontFamily="@font/neo_medium"
                 android:gravity="start"
                 android:text="Pull-ups" />
 
@@ -85,7 +85,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:fontFamily="@font/poppins"
                     android:gravity="start"
                     android:text="30" />
 
@@ -93,7 +92,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:fontFamily="@font/poppins"
                     android:gravity="start"
                     android:text="sets" />
 
@@ -108,7 +106,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:fontFamily="@font/poppins"
                     android:gravity="start"
                     android:text="30" />
 
@@ -116,7 +113,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:fontFamily="@font/poppins"
                     android:gravity="start"
                     android:text="reps" />
             </LinearLayout>

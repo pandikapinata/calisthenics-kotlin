@@ -1,9 +1,17 @@
 package com.example.pandu.calisthenics.auth
 
 
+import android.content.ContentValues
+import android.util.Log
 import com.example.pandu.calisthenics.api.ApiInterface
 import com.example.pandu.calisthenics.model.AuthResponse
 import com.example.pandu.calisthenics.model.BasicResponse
+import com.example.pandu.calisthenics.model.TaskResponse
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subscribers.ResourceSubscriber
 import okhttp3.RequestBody
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,6 +59,32 @@ class AuthPresenter(private val view: AuthView, private val service: ApiInterfac
                 }
             })
     }
+
+//    private val compositeDisposable = CompositeDisposable()
+//    fun loadTasks() {
+//        view.showLoading()
+//        val disposable : Disposable
+//        disposable = service.loadTasks()
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribeOn(Schedulers.io())
+//            .subscribeWith(object : ResourceSubscriber<TaskResponse>(){
+//                override fun onComplete() {
+//
+//                }
+//
+//                override fun onNext(t: TaskResponse?) {
+//                    t?.tasks?.let { view.getTaskList(it) }
+//
+//                }
+//
+//                override fun onError(t: Throwable?) {
+//                    Log.d(ContentValues.TAG, "ERROR LOAD TASKS$t")
+//                }
+//
+//            })
+//        compositeDisposable.addAll(disposable)
+//    }
+
 
 
 }

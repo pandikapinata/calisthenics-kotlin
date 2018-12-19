@@ -4,6 +4,13 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import com.example.pandu.calisthenics.model.AuthResponse
+import android.text.method.TextKeyListener.clear
+import android.R.id.edit
+import android.text.method.TextKeyListener.clear
+
+
+
+
 
 
 class PreferenceHelper (context: Context?){
@@ -16,7 +23,7 @@ class PreferenceHelper (context: Context?){
     private val FCM_TOKEN = "fcm_token"
     private val WEIGHT = "weight"
     private val HEIGHT = "height"
-    private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
+    private var preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
 //    save device token
     internal var deviceToken : String? = preferences.getString(TOKEN, "")
@@ -62,7 +69,11 @@ class PreferenceHelper (context: Context?){
     }
 
     fun logout(){
-        preferences.edit().clear().apply()
+//        preferences = contgetSharedPreferences(PREF_NAME, PRIVATE_MODE)
+//        val editor = pref.edit()
+//        editor.clear()
+//        editor.commit()
+        preferences.edit().remove(TOKEN).apply()
     }
 
 }

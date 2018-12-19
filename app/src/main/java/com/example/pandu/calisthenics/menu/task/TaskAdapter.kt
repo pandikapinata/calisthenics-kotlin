@@ -49,6 +49,7 @@ class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view){
         itemView.tv_reps_task.text = taskItem.taskReps
         itemView.tv_name_task.text = taskItem.taskName
         itemView.tv_date_task.text = toDatetoString(taskItem.taskDate.toString(),"EEE, dd MMM")
+        itemView.tv_time_task.text = toDatetoString(taskItem.taskDate.toString(),"HH:mm")
         Glide.with(itemView.context).load(taskItem.taskIcon).into(itemView.iv_task)
         itemView.setOnClickListener(){
             listener(taskItem)

@@ -2,10 +2,7 @@ package com.example.pandu.calisthenics.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.example.pandu.calisthenics.model.ActivityItem
-import com.example.pandu.calisthenics.model.Task
-import com.example.pandu.calisthenics.model.TaskDay
-import com.example.pandu.calisthenics.model.User
+import com.example.pandu.calisthenics.model.*
 import org.jetbrains.anko.db.*
 
 class SQLiteOpenHelper(ctx:Context): ManagedSQLiteOpenHelper(ctx, "TaskScheduler.db", null, 1) {
@@ -25,7 +22,7 @@ class SQLiteOpenHelper(ctx:Context): ManagedSQLiteOpenHelper(ctx, "TaskScheduler
         db?.createTable(
             Task.TABLE_TASK, true,
             Task.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
-//            Task.TASK_ID to TEXT,
+            Task.TASK_ID to TEXT,
 //            Task.USER_ID to TEXT,
             Task.ID_ACTIVITY to TEXT,
             Task.TASK_NAME to TEXT,
@@ -35,8 +32,22 @@ class SQLiteOpenHelper(ctx:Context): ManagedSQLiteOpenHelper(ctx, "TaskScheduler
             Task.TASK_VOLUME to TEXT,
             Task.TASK_DATE to TEXT,
             Task.TASK_ICON to TEXT,
-            Task.STATUS to TEXT
+            Task.STATUS_PUSH to TEXT,
+            Task.STATUS_DELETE to TEXT
         )
+
+//        db?.createTable(
+//            TaskSync.TABLE_TASK_TEMPORARY, true,
+//            TaskSync.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+//            TaskSync.ID_ACTIVITY to TEXT,
+//            TaskSync.TASK_NAME to TEXT,
+//            TaskSync.TASK_NOTE to TEXT,
+//            TaskSync.TASK_SETS to TEXT,
+//            TaskSync.TASK_REPS to TEXT,
+//            TaskSync.TASK_VOLUME to TEXT,
+//            TaskSync.TASK_DATE to TEXT,
+//            TaskSync.TASK_ICON to TEXT
+//        )
 
         db?.createTable(
             TaskDay.TABLE_TASKDAY, true,

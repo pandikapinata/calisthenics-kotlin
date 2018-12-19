@@ -3,6 +3,7 @@ package com.example.pandu.calisthenics.menu.dashboard
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,7 +38,7 @@ class DashboradFragment: Fragment(), DashboardView {
         super.onActivityCreated(savedInstanceState)
         preferencesHelper = PreferenceHelper(activity)
         presenter = DashboardPresenter(this, APIClient.getService(activity))
-
+        (activity as AppCompatActivity).supportActionBar!!.title = "Dashboard"
         if(isNetworkAvailable(context)){
             showLoading()
             presenter.getTaskperDay()

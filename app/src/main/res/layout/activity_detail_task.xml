@@ -19,16 +19,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="exitUntilCollapsed|scroll"
-            app:theme="@style/ToolbarTheme">
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_detail"
+                app:title="@string/app_name"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                android:theme="@style/NeoSansFontStyle"
                 app:layout_collapseMode="pin"
-                android:theme="@style/ToolbarTheme"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark" />
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -60,7 +60,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:id="@+id/iv_icon_detail"
@@ -73,9 +74,30 @@
                     android:layout_marginStart="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/neo_medium"
                     android:text="November 18"/>
             </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimaryDark"
+                android:fontFamily="@font/neo_medium"
+                android:text="Notes"/>
+
+            <TextView
+                android:id="@+id/tv_notes_detail"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/neo_medium"
+                android:lineSpacingMultiplier="1.3"
+                android:text="@string/lorem_ipsum"/>
 
             <LinearLayout
                 android:layout_marginTop="30dp"
@@ -83,7 +105,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -95,7 +118,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/neo_medium"
                     android:text="Sets"/>
 
                 <TextView
@@ -104,7 +127,7 @@
                     android:gravity="right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/neo_medium"
                     android:text="10"/>
             </LinearLayout>
 
@@ -114,7 +137,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -126,7 +150,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/neo_medium"
                     android:text="Repetitions"/>
 
                 <TextView
@@ -135,10 +159,9 @@
                     android:gravity="right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/neo_medium"
                     android:text="10"/>
             </LinearLayout>
-
 
             <View
                 android:layout_margin="15dp"
@@ -153,7 +176,8 @@
                 android:layout_marginEnd="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
                 <ImageView
                     android:layout_width="24dp"
@@ -165,7 +189,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorPrimaryDark"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/neo_medium"
                     android:text="Volume"/>
 
                 <TextView
@@ -174,7 +198,7 @@
                     android:gravity="right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins"
+                    android:fontFamily="@font/neo_medium"
                     android:text="100"/>
             </LinearLayout>
 

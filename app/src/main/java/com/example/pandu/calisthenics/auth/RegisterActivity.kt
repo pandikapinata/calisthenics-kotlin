@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.example.pandu.calisthenics.R
 import com.example.pandu.calisthenics.api.APIClient
 import com.example.pandu.calisthenics.model.AuthResponse
+import com.example.pandu.calisthenics.model.Task
 import com.example.pandu.calisthenics.utils.PreferenceHelper
 import kotlinx.android.synthetic.main.activity_register.*
 import org.jetbrains.anko.startActivity
@@ -142,5 +143,9 @@ class RegisterActivity : AppCompatActivity(), AuthView{
 
     override fun onFailure(t: Throwable) {
         Toast.makeText(this, "Failed : $t", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun getTaskList(task: List<Task>) {
+
     }
 }
